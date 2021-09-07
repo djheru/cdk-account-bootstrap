@@ -167,3 +167,22 @@ As in the SDLC environment setup, we will leverage AWS Secrets Manager to store 
       --name GITHUB_TOKEN \
       --secret-string ghp_GnE55voNzDi30iCcyz1ewltOEXAMPLE
     ```
+
+### Build, Push, Deploy
+
+1. Navigate to the infrastructure directory
+1. Ensure that you have configured credentials for `cicd`, and log in
+    ```bash
+    aws sso login --profile cicd && cdk-sso-sync cicd
+    ```
+1. Build the CDK app
+    - `npm run build`
+1. If everything builds successfully, commit and push your changes
+    ```bash
+    git add .
+    git commit -m "Add CICD pipeline"
+    git push
+    ```
+1. Now, deploy the pipeline
+    - `npm run cdk deploy LandingPagePipelineStack -- --profile cicd`
+    - Acccept the changes and confirm
